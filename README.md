@@ -32,7 +32,7 @@ pip install requests
 
 ```bash
 python vacancy_parser.py
-
+```
 В консоли будет выведен список вакансий с их основными характеристиками.
 
 ## Настройка
