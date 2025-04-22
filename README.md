@@ -43,8 +43,12 @@ python vacancy_parser.py
 
 - text - поисковый запрос (по умолчанию "Data Scientist")
 
-- area - ID региона (1 - Москва)
+- area - ID региона (78 - Самара)
 
 - per_page - количество вакансий на странице
 
-- professional_roles - фильтр по профессиональным ролям (список ID ролей можно найти в документации API)
+- professional_roles - фильтр по профессиональным ролям (список ID ролей можно найти в документации API hh.ru)
+
+## Официальная документация HH.ru
+
+[Документация API](https://api.hh.ru/openapi/redoc#section/Obshaya-informaciya)
