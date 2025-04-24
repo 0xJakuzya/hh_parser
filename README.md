@@ -4,7 +4,7 @@
 
 ## Диаграмма
 
-![Диаграмма проекта](img/hh_parse_tgbot.drawio.svg)
+![Диаграмма проекта](/img/hh_parse_tgbot.drawio.svg)
 
 ## Официальная документация HH.ru
 
