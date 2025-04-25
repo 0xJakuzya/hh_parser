@@ -1,7 +1,6 @@
 import asyncio
 import logging
 
-
 from bot.bot import VacancyBot
 
 logging.basicConfig(

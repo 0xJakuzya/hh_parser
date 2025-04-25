@@ -1,12 +1,16 @@
+
+
 class Vacancy:
     def __init__(self, data: dict):
+        
         self.name = data.get("name", "Без названия")
         self.employer = data.get("employer", {}).get("name", "Компания не указана")
-        self.salary = data.get("salary")
+        self.salary = self.parse_salary(data.get("salary")) 
         self.experience = data.get("experience", {}).get("name", "Не указан")
         self.url = data.get("alternate_url", "#")
 
-    def _parse_salary(self, salary_data: dict) -> str:
+    def parse_salary(self, salary_data: dict) -> str:
+
         if not salary_data:
             return "не указана"
             
@@ -30,3 +34,7 @@ class Vacancy:
             f"📊 {self.experience}\n"
             f"🔗 {self.url}"
         )
+    
+    def __str__(self):
+        return self.formatted()
+    
