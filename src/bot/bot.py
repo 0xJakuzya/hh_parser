@@ -3,27 +3,28 @@ from aiogram.filters import Command
 
 from config import config
 from parser.api import API
+from parser.models import Vacancy
 
 import logging
 import asyncio
 
-
 class VacancyBot:
+    
     def __init__(self):
 
         self.bot = Bot(token=config.BOT_TOKEN)
-        self.dp = Dispatcher()
         self.api = API()
+        self.dp = Dispatcher()
         self.register_handlers()
 
     def register_handlers(self):
 
-        self.dp.message(Command("start"), self.send_welcome)
-        self.dp.message(Command("vacancies"), self.send_vacancies)
-        self.dp.message(Command("search"), self.search_vacancies)    
-
+        self.dp.message.register(self.send_welcome, Command("start"))
+        self.dp.message.register(self.send_vacancies, Command("vacancies"))
+        self.dp.message.register(self.search_vacancies, Command("search"))
 
     async def send_welcome(self, message: types.Message):
+
         await message.reply(
             "Привет! Я бот для поиска вакансий.\n"
             "Используйте команды:\n"
@@ -31,14 +32,10 @@ class VacancyBot:
             "/search <запрос> <регион> - кастомный поиск"
         )
 
-
     async def send_vacancies(self, message: types.Message):
+
         try:
-            vacancies = self.api.get_vacancies(
-                config.DEFAULT_SEARCH,
-                config.DEFAULT_AREA,
-                config.MAX_VACANCIES
-            )
+            vacancies = await self.api.get_vacancies(config.DEFAULT_SEARCH_QUERY, config.DEFAULT_AREA_ID, config.MAX_VACANCIES)  
 
             if not vacancies:
                 await message.reply("Вакансий не найдено.")
@@ -52,7 +49,8 @@ class VacancyBot:
             logging.error(f"Ошибка в send_vacancies: {e}")
             await message.reply(f"Произошла ошибка при обработке запроса: {e}")
 
-    async def search_vacancies(self, message: types.Message):
+    async def search_vacancies(self, message: types.Message): #пока не работает!
+        
         try:
             _, query, area = message.text.split(maxsplit=2)
             area = int(area)
@@ -62,7 +60,7 @@ class VacancyBot:
             return
 
         try:
-            vacancies = self.api.get_vacancies(query, area, 3)
+            vacancies = self.api.get_vacancies(query, area)
 
             if not vacancies:
                 await message.reply("По вашему запросу ничего не найдено")
@@ -77,4 +75,3 @@ class VacancyBot:
     
     async def run(self):
         await self.dp.start_polling(self.bot)
-
