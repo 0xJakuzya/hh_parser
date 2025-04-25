@@ -6,6 +6,11 @@
 
 ![Диаграмма](/img/hh_parse_tgbot.png)
 
+## На каком я сейчас этапе?
+
+-25.04.25 Я реализовал бота на локалке с функциями: /start, /vacancies. Пока он парсит данные с config.py
+
+
 ## Официальная документация HH.ru
 
 [Документация API](https://api.hh.ru/openapi/redoc#section/Obshaya-informaciya)
