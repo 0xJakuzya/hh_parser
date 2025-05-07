@@ -19,6 +19,5 @@ class Config:
         self.DEFAULT_SEARCH_QUERY = "Data Scientist"
         self.DEFAULT_AREA_ID = 78  
         self.MAX_VACANCIES = 100
-        self.PROFESSIONAL_ROLES = (96, 10)
 
 config = Config()
